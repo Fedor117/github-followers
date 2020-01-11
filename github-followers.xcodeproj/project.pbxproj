@@ -24,7 +24,7 @@
 		60365BAB23C3B4EB0026CC34 /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60365BAA23C3B4EB0026CC34 /* Follower.swift */; };
 		60365BAD23C3B75B0026CC34 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60365BAC23C3B75B0026CC34 /* User.swift */; };
 		60BA890823C3BF6800956831 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BA890723C3BF6800956831 /* NetworkManager.swift */; };
-		60BA890B23C5284F00956831 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BA890A23C5284F00956831 /* ErrorMessage.swift */; };
+		60BA890B23C5284F00956831 /* GFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BA890A23C5284F00956831 /* GFError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +47,7 @@
 		60365BAA23C3B4EB0026CC34 /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
 		60365BAC23C3B75B0026CC34 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		60BA890723C3BF6800956831 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		60BA890A23C5284F00956831 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
+		60BA890A23C5284F00956831 /* GFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,7 +154,7 @@
 		60BA890923C5283E00956831 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				60BA890A23C5284F00956831 /* ErrorMessage.swift */,
+				60BA890A23C5284F00956831 /* GFError.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -241,7 +241,7 @@
 				600101DD23C0C6D6001BE72E /* FavoritesViewController.swift in Sources */,
 				600101E523C0F210001BE72E /* GFTitleLabel.swift in Sources */,
 				600101C923C0C11D001BE72E /* SceneDelegate.swift in Sources */,
-				60BA890B23C5284F00956831 /* ErrorMessage.swift in Sources */,
+				60BA890B23C5284F00956831 /* GFError.swift in Sources */,
 				60BA890823C3BF6800956831 /* NetworkManager.swift in Sources */,
 				600101E123C0CF06001BE72E /* GFTextField.swift in Sources */,
 				60365B9E23C39D7B0026CC34 /* GFBodyLabel.swift in Sources */,

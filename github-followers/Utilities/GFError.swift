@@ -1,5 +1,5 @@
 //
-//  ErrorMessage.swift
+//  GFError.swift
 //  github-followers
 //
 //  Created by Theodor Valiavko on 07/01/2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ErrorMessage: String {
+enum GFError: String, Error {
 
     case invalidUsername = "This username created an invalid request. Please try again."
     case unableToComplete = "Unable to complete your request. Please check your internet connection."
