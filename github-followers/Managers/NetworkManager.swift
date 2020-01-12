@@ -6,13 +6,14 @@
 //  Copyright © 2020 Theodor Valiavko. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class NetworkManager {
 
     static let shared = NetworkManager()
 
-    let baseURL = "https://api.github.com/users/"
+    let cache = NSCache<NSString, UIImage>()
+    private let baseURL = "https://api.github.com/users/"
     
     private init() {}
     

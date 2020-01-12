@@ -3,7 +3,7 @@
 //  github-followers
 //
 //  Created by Theodor Valiavko on 06/01/2020.
-//  Copyright © 2020 Fedor Valiavko. All rights reserved.
+//  Copyright © 2020 Theodor Valiavko. All rights reserved.
 //
 
 import UIKit
