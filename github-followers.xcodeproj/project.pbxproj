@@ -98,6 +98,55 @@
 			path = "github-followers";
 			sourceTree = "<group>";
 		};
+		600BC9E223CD1E0700814DAE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				60365BA723C3ACBE0026CC34 /* GFAlertContainerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		600BC9E323CD1E0E00814DAE /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				600101DE23C0CABE001BE72E /* GFButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		600BC9E423CD1E1400814DAE /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				600101E023C0CF06001BE72E /* GFTextField.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
+		600BC9E523CD1E1D00814DAE /* ImageViews */ = {
+			isa = PBXGroup;
+			children = (
+				605FFB6D23CA8FD700F8B0F6 /* GFAvatarImageView.swift */,
+			);
+			path = ImageViews;
+			sourceTree = "<group>";
+		};
+		600BC9E623CD1E2400814DAE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				60365B9F23C39E270026CC34 /* GFAlertViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		600BC9E723CD1E3700814DAE /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				600101E423C0F210001BE72E /* GFTitleLabel.swift */,
+				60365B9D23C39D7B0026CC34 /* GFBodyLabel.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
 		60365BA323C3AA060026CC34 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,14 +160,13 @@
 		60365BA423C3AA830026CC34 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				600BC9E723CD1E3700814DAE /* Labels */,
+				600BC9E623CD1E2400814DAE /* ViewControllers */,
+				600BC9E523CD1E1D00814DAE /* ImageViews */,
+				600BC9E423CD1E1400814DAE /* TextFields */,
+				600BC9E323CD1E0E00814DAE /* Buttons */,
+				600BC9E223CD1E0700814DAE /* Views */,
 				605FFB6A23CA8F3300F8B0F6 /* Cells */,
-				60365B9F23C39E270026CC34 /* GFAlertViewController.swift */,
-				600101DE23C0CABE001BE72E /* GFButton.swift */,
-				600101E023C0CF06001BE72E /* GFTextField.swift */,
-				600101E423C0F210001BE72E /* GFTitleLabel.swift */,
-				60365B9D23C39D7B0026CC34 /* GFBodyLabel.swift */,
-				60365BA723C3ACBE0026CC34 /* GFAlertContainerView.swift */,
-				605FFB6D23CA8FD700F8B0F6 /* GFAvatarImageView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
