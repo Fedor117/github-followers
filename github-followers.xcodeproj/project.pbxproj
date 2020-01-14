@@ -27,6 +27,7 @@
 		60365BAD23C3B75B0026CC34 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60365BAC23C3B75B0026CC34 /* User.swift */; };
 		605FFB6C23CA8F5000F8B0F6 /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605FFB6B23CA8F5000F8B0F6 /* FollowerCell.swift */; };
 		605FFB6E23CA8FD700F8B0F6 /* GFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605FFB6D23CA8FD700F8B0F6 /* GFAvatarImageView.swift */; };
+		60831F4E23CE5C6C0041E820 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60831F4D23CE5C6C0041E820 /* UserInfoViewController.swift */; };
 		60BA890823C3BF6800956831 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BA890723C3BF6800956831 /* NetworkManager.swift */; };
 		60BA890B23C5284F00956831 /* GFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BA890A23C5284F00956831 /* GFError.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,7 @@
 		60365BAC23C3B75B0026CC34 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		605FFB6B23CA8F5000F8B0F6 /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		605FFB6D23CA8FD700F8B0F6 /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
+		60831F4D23CE5C6C0041E820 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		60BA890723C3BF6800956831 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		60BA890A23C5284F00956831 /* GFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,6 +158,7 @@
 				600101DA23C0C697001BE72E /* SearchViewController.swift */,
 				600101E223C0DBB1001BE72E /* FollowerListViewController.swift */,
 				600101DC23C0C6D6001BE72E /* FavoritesViewController.swift */,
+				60831F4D23CE5C6C0041E820 /* UserInfoViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60365BA823C3ACBE0026CC34 /* GFAlertContainerView.swift in Sources */,
+				60831F4E23CE5C6C0041E820 /* UserInfoViewController.swift in Sources */,
 				600101E323C0DBB1001BE72E /* FollowerListViewController.swift in Sources */,
 				60365BA223C3A5610026CC34 /* UIViewController+Ext.swift in Sources */,
 				600101C723C0C11D001BE72E /* AppDelegate.swift in Sources */,
