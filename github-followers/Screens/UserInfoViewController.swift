@@ -10,12 +10,15 @@ import UIKit
 
 class UserInfoViewController: UIViewController {
 
+    let headerView = UIView()
+    
     var username: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configure()
+        layoutUI()
 
         getUserData()
     }
@@ -31,6 +34,26 @@ class UserInfoViewController: UIViewController {
         navigationItem.rightBarButtonItem = doneBtn
     }
     
+    private func layoutUI() {
+        view.addSubview(headerView)
+        
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 180)
+        ])
+    }
+    
+    private func add(childViewController: UIViewController, to containerView: UIView) {
+        addChild(childViewController)
+        containerView.addSubview(childViewController.view)
+        childViewController.view.frame = containerView.bounds
+        childViewController.didMove(toParent: self)
+    }
+    
     private func getUserData() {
         showLoadingView()
         
@@ -43,15 +66,12 @@ class UserInfoViewController: UIViewController {
             
             switch(result) {
             case .success(let user):
-                self.updateData(with: user)
-                break
+                DispatchQueue.main.async {
+                    self.add(childViewController: GFUserInfoHeaderViewController(user: user), to: self.headerView)
+                }
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Bad Stuff Happened", message: error.rawValue, buttonTitle: "Ok")
             }
         }
-    }
-    
-    private func updateData(with user: User) {
-        #warning("Not implemented.")
     }
 }
