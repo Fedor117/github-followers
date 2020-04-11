@@ -13,6 +13,8 @@ class GFItemInfoView: UIView {
     enum ItemInfoType {
         case repos
         case gists
+        case followers
+        case following
     }
 
     let symbolImageView = UIImageView()
@@ -27,6 +29,33 @@ class GFItemInfoView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func set(itemInfoType: ItemInfoType, withCount count: Int) {
+        switch itemInfoType {
+        case .repos:
+            symbolImageView.image = UIImage(systemName: SFSymbols.repos)
+            titleLabel.text = "Public Repos"
+            countLabel.text = String(count)
+            break
+        case .gists:
+            symbolImageView.image = UIImage(systemName: SFSymbols.gists)
+            titleLabel.text = "Public Gists"
+            break
+        case .followers:
+            symbolImageView.image = UIImage(systemName: SFSymbols.followers)
+            titleLabel.text = "Followers"
+            break
+        case .following:
+            symbolImageView.image = UIImage(systemName: SFSymbols.following)
+            titleLabel.text = "Following"
+            break
+        default:
+            fatalError("Unknown ItemInfoType.")
+            break
+        }
+        
+        countLabel.text = String(count)
     }
     
     private func configure() {
