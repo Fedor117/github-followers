@@ -13,6 +13,7 @@ class UserInfoViewController: UIViewController {
     let headerView = UIView()
     let itemViewOne = UIView()
     let itemViewTwo = UIView()
+    let dateLabel = GFBodyLabel(textAlignment: .center)
 
     var username: String!
     
@@ -39,7 +40,7 @@ class UserInfoViewController: UIViewController {
     private func layoutUI() {
         let padding: CGFloat = 20
         
-        let itemViews = [headerView, itemViewOne, itemViewTwo]
+        let itemViews = [headerView, itemViewOne, itemViewTwo, dateLabel]
         for itemView in itemViews {
             itemView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(itemView)
@@ -61,6 +62,9 @@ class UserInfoViewController: UIViewController {
             
             itemViewTwo.topAnchor.constraint(equalTo: itemViewOne.bottomAnchor, constant: padding),
             itemViewTwo.heightAnchor.constraint(equalToConstant: itemHeight),
+            
+            dateLabel.topAnchor.constraint(equalTo: itemViewTwo.bottomAnchor, constant: padding),
+            dateLabel.heightAnchor.constraint(equalToConstant: 18)
         ])
     }
     
@@ -89,6 +93,8 @@ class UserInfoViewController: UIViewController {
                     self.add(childViewController: GFRepoItemViewController(user: user), to: self.itemViewOne)
                     
                     self.add(childViewController: GFFollowerItemInfoViewController(user: user), to: self.itemViewTwo)
+                    
+                    self.dateLabel.text = "GitHub since \(user.createdAt.convertToDisplayFormat())."
                 }
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Bad Stuff Happened", message: error.rawValue, buttonTitle: "Ok")
