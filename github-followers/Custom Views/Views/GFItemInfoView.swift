@@ -50,9 +50,6 @@ class GFItemInfoView: UIView {
             symbolImageView.image = UIImage(systemName: SFSymbols.following)
             titleLabel.text = "Following"
             break
-        default:
-            fatalError("Unknown ItemInfoType.")
-            break
         }
         
         countLabel.text = String(count)
