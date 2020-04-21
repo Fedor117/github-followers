@@ -8,8 +8,11 @@
 
 import UIKit
 
+protocol FollowerListViewControllerDelegate: class {
+    func didRequestFollowers(for user: User)
+}
+
 class FollowerListViewController: UIViewController {
-    
     enum Section {
         case main
     }
@@ -118,8 +121,7 @@ class FollowerListViewController: UIViewController {
     }
 }
 
-// MARK: - Extensions
-
+// MARK: - UICollectionViewDelegate
 extension FollowerListViewController: UICollectionViewDelegate {
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -139,14 +141,15 @@ extension FollowerListViewController: UICollectionViewDelegate {
         
         let destinationViewController = UserInfoViewController()
         destinationViewController.username = follower.login
+        destinationViewController.delegate = self
 
         let navigationController = UINavigationController(rootViewController: destinationViewController)
         present(navigationController, animated: true)
     }
 }
 
-extension FollowerListViewController: UISearchResultsUpdating, UISearchBarDelegate {
-
+// MARK: - UISearchResultsUpdating
+extension FollowerListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let filter = searchController.searchBar.text, !filter.isEmpty else {
             return
@@ -157,10 +160,27 @@ extension FollowerListViewController: UISearchResultsUpdating, UISearchBarDelega
         
         updateData(on: filteredFollowers)
     }
-    
+}
+
+// MARK: - UISearchBarDelegate
+extension FollowerListViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearching = false
 
         updateData(on: followers)
+    }
+}
+
+// MARK: - FollowerListViewControllerDelegate
+extension FollowerListViewController: FollowerListViewControllerDelegate {
+    func didRequestFollowers(for user: User) {
+        username = user.login
+        title = username
+        page = 1
+        followers.removeAll()
+        filteredFollowers.removeAll()
+        collectionView.setContentOffset(.zero, animated: true)
+        
+        getFollowers(username: username, page: page)
     }
 }

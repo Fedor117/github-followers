@@ -16,6 +16,10 @@ final class GFFollowerItemInfoViewController: GFItemInfoViewController {
         configureItems()
     }
     
+    override func actionButtonTapped() {
+        delegate?.didRequestFollowers(for: user)
+    }
+    
     private func configureItems() {
         itemInfoViewOne.set(itemInfoType: .followers, withCount: user.followers)
         itemInfoViewTwo.set(itemInfoType: .following, withCount: user.following)
