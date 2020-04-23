@@ -2,8 +2,8 @@
 //  PersistenceManager.swift
 //  github-followers
 //
-//  Created by Fedor Valiavko on 4/23/20.
-//  Copyright © 2020 Fedor Valiavko. All rights reserved.
+//  Created by Theodor Valiavko on 4/23/20.
+//  Copyright © 2020 Theodor Valiavko. All rights reserved.
 //
 
 import Foundation
