@@ -43,7 +43,7 @@ class FollowerListViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
-    func getFollowers(username: String, page: Int) {
+    private func getFollowers(username: String, page: Int) {
         showLoadingView()
         
         NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in

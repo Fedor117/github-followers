@@ -9,11 +9,10 @@
 import UIKit
 
 class FollowerCell: UICollectionViewCell {
-    
     static let reuseId = "FollowerCell"
     
-    let avatarImageView = GFAvatarImageView(frame: .zero)
-    let usernameLabel = GFTitleLabel(textAlignment: .center, fontSize: 16)
+    private let avatarImageView = GFAvatarImageView(frame: .zero)
+    private let usernameLabel = GFTitleLabel(textAlignment: .center, fontSize: 16)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,11 +30,12 @@ class FollowerCell: UICollectionViewCell {
     }
     
     private func configure() {
-        addSubview(avatarImageView)
-        addSubview(usernameLabel)
+        let subviews = [avatarImageView, usernameLabel]
+        for subview in subviews {
+            addSubview(subview)
+        }
         
         let padding: CGFloat = 8
-        
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
             avatarImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
