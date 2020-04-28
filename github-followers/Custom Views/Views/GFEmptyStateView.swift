@@ -8,10 +8,10 @@
 
 import UIKit
 
-class GFEmptyStateView: UIView {
+final class GFEmptyStateView: UIView {
 
-    let messageLabel = GFTitleLabel(textAlignment: .center, fontSize: 20)
-    let logoImageView = UIImageView()
+    private let messageLabel = GFTitleLabel(textAlignment: .center, fontSize: 20)
+    private let logoImageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
