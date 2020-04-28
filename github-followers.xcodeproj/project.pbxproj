@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4D93EA922451D8A700D8B42A /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D93EA912451D8A700D8B42A /* PersistenceManager.swift */; };
+		4DCAD7F12458DBE300669C45 /* GFDataLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCAD7F02458DBE300669C45 /* GFDataLoadingViewController.swift */; };
 		600101C723C0C11D001BE72E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600101C623C0C11D001BE72E /* AppDelegate.swift */; };
 		600101C923C0C11D001BE72E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600101C823C0C11D001BE72E /* SceneDelegate.swift */; };
 		600101D023C0C122001BE72E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 600101CF23C0C122001BE72E /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		4D93EA912451D8A700D8B42A /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		4DCAD7F02458DBE300669C45 /* GFDataLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFDataLoadingViewController.swift; sourceTree = "<group>"; };
 		600101C323C0C11D001BE72E /* github-followers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "github-followers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		600101C623C0C11D001BE72E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		600101C823C0C11D001BE72E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				608E0822244F93FB00E8FB9B /* ItemInfoViewControllers */,
 				60365B9F23C39E270026CC34 /* GFAlertViewController.swift */,
 				602B23F623EC494200130573 /* GFUserInfoHeaderViewController.swift */,
+				4DCAD7F02458DBE300669C45 /* GFDataLoadingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				608E0821244F937B00E8FB9B /* GFFollowerItemInfoViewController.swift in Sources */,
 				60BA890B23C5284F00956831 /* GFError.swift in Sources */,
 				600BC9E123CBCB7300814DAE /* UIHelper.swift in Sources */,
+				4DCAD7F12458DBE300669C45 /* GFDataLoadingViewController.swift in Sources */,
 				60BA890823C3BF6800956831 /* NetworkManager.swift in Sources */,
 				600101E123C0CF06001BE72E /* GFTextField.swift in Sources */,
 				60FE5B29244F97BF00F4CDE9 /* Date+Ext.swift in Sources */,
