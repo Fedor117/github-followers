@@ -12,19 +12,31 @@ protocol FollowerListViewControllerDelegate: class {
     func didRequestFollowers(for user: User)
 }
 
-class FollowerListViewController: UIViewController {
+final class FollowerListViewController: UIViewController {
     enum Section {
         case main
     }
 
-    var followers: [Follower] = []
-    var filteredFollowers: [Follower] = []
-    var page = 1
-    var hasMoreFollowers = true
-    var isSearching = false
-    var username: String!
-    var collectionView: UICollectionView!
-    var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
+    private var followers: [Follower] = []
+    private var filteredFollowers: [Follower] = []
+    private var page = 1
+    private var hasMoreFollowers = true
+    private var isSearching = false
+    private var username: String
+    private var collectionView: UICollectionView!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
+    
+    init(username: String) {
+        self.username = username
+
+        super.init(nibName: nil, bundle: nil)
+
+        title = username
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -172,10 +184,7 @@ extension FollowerListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let activeArray = isSearching ? filteredFollowers : followers
-        let follower = activeArray[indexPath.item]
-        
-        let destinationViewController = UserInfoViewController()
-        destinationViewController.username = follower.login
+        let destinationViewController = UserInfoViewController(username: activeArray[indexPath.item].login)
         destinationViewController.delegate = self
 
         let navigationController = UINavigationController(rootViewController: destinationViewController)

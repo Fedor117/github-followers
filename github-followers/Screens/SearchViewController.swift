@@ -9,11 +9,9 @@
 import UIKit
 
 final class SearchViewController: UIViewController {
-    
-    let logoImageView = UIImageView()
-    let usernameTextField = GFTextField()
-    let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
-    var logoImageViewTopConstraint: NSLayoutConstraint!
+    private let logoImageView = UIImageView()
+    private let usernameTextField = GFTextField()
+    private let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
 
     var isUsernameEmpty: Bool {
         return usernameTextField.text?.isEmpty ?? true
@@ -51,7 +49,7 @@ final class SearchViewController: UIViewController {
         logoImageView.image = UIImage(named: ImageAssets.githubLogo)
         
         let topConstraintConstant: CGFloat = (DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed) ? 20 : 80
-        logoImageViewTopConstraint = logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraintConstant)
+        let logoImageViewTopConstraint = logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraintConstant)
         
         NSLayoutConstraint.activate([
             logoImageViewTopConstraint,
@@ -94,11 +92,8 @@ final class SearchViewController: UIViewController {
         }
 
         usernameTextField.resignFirstResponder()
-        
-        let followerList = FollowerListViewController()
-        followerList.username = usernameTextField.text
-        followerList.title = usernameTextField.text
-        navigationController?.pushViewController(followerList, animated: true)
+
+        navigationController?.pushViewController(FollowerListViewController(username: usernameTextField.text!), animated: true)
     }
 }
 

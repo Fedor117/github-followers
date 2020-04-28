@@ -13,14 +13,25 @@ protocol UserInfoViewControllerDelegate: class {
     func didRequestFollowers(for user: User)
 }
 
-class UserInfoViewController: UIViewController {
-    let headerView = UIView()
-    let itemViewOne = UIView()
-    let itemViewTwo = UIView()
-    let dateLabel = GFBodyLabel(textAlignment: .center)
+final class UserInfoViewController: UIViewController {
+    private let headerView = UIView()
+    private let itemViewOne = UIView()
+    private let itemViewTwo = UIView()
+    private let dateLabel = GFBodyLabel(textAlignment: .center)
 
-    var username: String!
+    private var username: String
+
     weak var delegate: FollowerListViewControllerDelegate?
+    
+    init(username: String) {
+        self.username = username
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

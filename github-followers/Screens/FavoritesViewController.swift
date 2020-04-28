@@ -68,12 +68,7 @@ final class FavoritesViewController: UIViewController {
 // MARK: - UITableViewDelegate
 extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let favorite = favorites[indexPath.row]
-        let destinationViewController = FollowerListViewController()
-        destinationViewController.username = favorite.login
-        destinationViewController.title = favorite.login
-        
-        navigationController?.pushViewController(destinationViewController, animated: true)
+        navigationController?.pushViewController(FollowerListViewController(username: favorites[indexPath.row].login), animated: true)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
