@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum ImageAssets {
+    static let githubLogo = "gh-logo"
+    static let emptyStateLogo = "empty-state-logo"
+    static let avatarPlaceholder = "avater-placeholder"
+}
+
 enum SFSymbols {
     static let location = "mappin.and.ellipse"
     static let repos = "folder"
