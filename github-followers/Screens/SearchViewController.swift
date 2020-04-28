@@ -39,7 +39,7 @@ final class SearchViewController: UIViewController {
     }
     
     private func makeDismissKeyboardTapGesture() -> UITapGestureRecognizer {
-        return UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        return UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
     }
     
     private func configureLogoImageView() {
