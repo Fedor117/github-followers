@@ -8,22 +8,50 @@
 
 import UIKit
 
-class NetworkManager {
+final class NetworkManager {
 
     static let shared = NetworkManager()
-    static let numberOfItemsPerPage = 100
 
-    let cache = NSCache<NSString, UIImage>()
-    let decoder: JSONDecoder
+    private let cache = NSCache<NSString, UIImage>()
+    private let decoder: JSONDecoder
     private let baseURL = "https://api.github.com/users/"
     
     private init() {
         decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .iso8601
+    }
+    
+    func downloadImage(from urlString: String, completed: @escaping (Result<UIImage, GFError>) -> Void) {
+        let cacheKey = NSString(string: urlString)
+        if let image = cache.object(forKey: cacheKey) {
+            completed(.success(image))
+            return
+        }
+        
+        getData(endpoint: urlString) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
+            switch result {
+            case .success(let data):
+                guard let image = UIImage(data: data) else {
+                    completed(.failure(.invalidData))
+                    return
+                }
+                
+                self.cache.setObject(image, forKey: cacheKey)
+                completed(.success(image))
+
+            case .failure(let error):
+                completed(.failure(error))
+            }
+        }
     }
     
     func getFollowers(for username: String, page: Int, completed: @escaping (Result<[Follower], GFError>) -> Void) {
-        let endpoint = baseURL + "\(username)/followers?per_page=\(NetworkManager.numberOfItemsPerPage)&page=\(page)"
+        let endpoint = baseURL + "\(username)/followers?per_page=\(Config.numberOfItemsPerPage)&page=\(page)"
         
         getData(endpoint: endpoint) { [weak self] result in
             guard let self = self else {

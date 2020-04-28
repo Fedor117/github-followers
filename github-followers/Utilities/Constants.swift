@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum Config {
+    /// Number of followers requested from GitHub
+    static let numberOfItemsPerPage = 100
+}
+
 enum ImageAssets {
     static let githubLogo = "gh-logo"
     static let emptyStateLogo = "empty-state-logo"

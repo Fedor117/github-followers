@@ -67,7 +67,7 @@ final class FollowerListViewController: UIViewController {
 
             switch (result) {
             case .success(let followers):
-                self.hasMoreFollowers = followers.count >= NetworkManager.numberOfItemsPerPage
+                self.hasMoreFollowers = followers.count >= Config.numberOfItemsPerPage
                 self.followers.append(contentsOf: followers)
                 
                 if self.followers.isEmpty {
