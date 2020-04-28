@@ -8,23 +8,24 @@
 
 import UIKit
 
-class GFAlertViewController: UIViewController {
+final class GFAlertViewController: UIViewController {
+    
+    private let containerView = GFAlertContainerView()
+    private let titleLabel = GFTitleLabel(textAlignment: .center, fontSize: 20)
+    private let messageLabel = GFBodyLabel(textAlignment: .center)
+    private let actionButton = GFButton(backgroundColor: .systemRed, title: "Ok")
+    private let padding: CGFloat = 20
 
-    let containerView = GFAlertContainerView()
-    let titleLabel = GFTitleLabel(textAlignment: .center, fontSize: 20)
-    let messageLabel = GFBodyLabel(textAlignment: .center)
-    let actionButton = GFButton(backgroundColor: .systemRed, title: "Ok")
-    let padding: CGFloat = 20
-    var alertTitle: String?
-    var message: String?
-    var buttonTitle: String?
+    private var alertTitle: String
+    private var message: String
+    private var buttonTitle: String
     
     init(title: String, message: String, buttonTitle: String) {
-        super.init(nibName: nil, bundle: nil)
-        
         self.alertTitle = title
         self.message = message
         self.buttonTitle = buttonTitle
+        
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -34,7 +35,7 @@ class GFAlertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
         
         configureContainerView()
         configureTitleLabel()
@@ -56,7 +57,7 @@ class GFAlertViewController: UIViewController {
     private func configureTitleLabel() {
         containerView.addSubview(titleLabel)
         
-        titleLabel.text = alertTitle ?? "Something went wrong"
+        titleLabel.text = alertTitle
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: padding),
@@ -69,7 +70,7 @@ class GFAlertViewController: UIViewController {
     private func configureActionButton() {
         containerView.addSubview(actionButton)
         
-        actionButton.setTitle(buttonTitle ?? "Ok", for: .normal)
+        actionButton.setTitle(buttonTitle, for: .normal)
         actionButton.addTarget(self, action: #selector(dismissViewController), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
@@ -83,7 +84,7 @@ class GFAlertViewController: UIViewController {
     private func configureMessageLabel() {
         containerView.addSubview(messageLabel)
         
-        messageLabel.text = message ?? "Unable to complete request"
+        messageLabel.text = message
         messageLabel.numberOfLines = 4
         
         NSLayoutConstraint.activate([
