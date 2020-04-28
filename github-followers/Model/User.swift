@@ -17,7 +17,7 @@ struct User: Codable {
     let htmlUrl: String
     let following: Int
     let followers: Int
-    let createdAt: String
+    let createdAt: Date
     var name: String?
     var location: String?
     var bio: String?
