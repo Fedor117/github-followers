@@ -50,7 +50,7 @@ final class UserInfoViewController: GFDataLoadingViewController {
         view.backgroundColor = .systemBackground
         
         let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissViewController))
-        navigationItem.rightBarButtonItem = doneBtn
+        navigationItem.leftBarButtonItem = doneBtn
     }
     
     private func configureUIElements(with user: User) {
