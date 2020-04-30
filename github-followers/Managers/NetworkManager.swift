@@ -14,7 +14,14 @@ final class NetworkManager {
 
     private let cache = NSCache<NSString, UIImage>()
     private let decoder: JSONDecoder
-    private let baseURL = "https://api.github.com/users/"
+    private var currentTasks = [String: URLSessionDataTask]()
+    
+    private var baseUrl: URLComponents {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.github.com"
+        return urlComponents
+    }
     
     private init() {
         decoder = JSONDecoder()
@@ -29,7 +36,12 @@ final class NetworkManager {
             return
         }
         
-        getData(endpoint: urlString) { [weak self] result in
+        guard let url = URL(string: urlString) else {
+            completed(.failure(.invalidUrl))
+            return
+        }
+        
+        getData(url: url) { [weak self] result in
             guard let self = self else {
                 return
             }
@@ -51,21 +63,15 @@ final class NetworkManager {
     }
     
     func getFollowers(for username: String, page: Int, completed: @escaping (Result<[Follower], GFError>) -> Void) {
-        let endpoint = baseURL + "\(username)/followers?per_page=\(Config.numberOfItemsPerPage)&page=\(page)"
-        
-        getData(endpoint: endpoint) { [weak self] result in
-            guard let self = self else {
+        guard let url = makeUrl(with: "/users/\(username)/followers", query: ["per_page": "\(Config.numberOfItemsPerPage)", "page": String(page)]) else {
+                completed(.failure(.invalidUrl))
                 return
-            }
-            
+        }
+        
+        getDecodedData(url: url, type: [Follower].self) { result in
             switch result {
-            case .success(let data):
-                do {
-                    let followers = try self.decoder.decode([Follower].self, from: data)
-                    completed(.success(followers))
-                } catch {
-                    completed(.failure(.invalidData))
-                }
+            case .success(let followers):
+                completed(.success(followers))
             case .failure(let error):
                 completed(.failure(error))
             }
@@ -73,9 +79,30 @@ final class NetworkManager {
     }
     
     func getUserData(for username: String, completed: @escaping (Result<User, GFError>) -> Void) {
-        let endpoint = baseURL + "\(username)"
+        guard let url = makeUrl(with: "/users/\(username)") else {
+                completed(.failure(.invalidUrl))
+                return
+        }
+        
+        getDecodedData(url: url, type: User.self) { result in
+            switch result {
+            case .success(let user):
+                completed(.success(user))
+            case .failure(let error):
+                completed(.failure(error))
+            }
+        }
+    }
 
-        getData(endpoint: endpoint) { [weak self] result in
+    func cancelTask(for urlString: String) {
+        if let currentTask = currentTasks[urlString], URLSessionDataTask.State.canceling != currentTask.state {
+            currentTask.cancel()
+            
+        }
+    }
+    
+    private func getDecodedData<T: Codable>(url: URL, type: T.Type, completed: @escaping (Result<T, GFError>) ->Void) {
+        getData(url: url) { [weak self] result in
             guard let self = self else {
                 return
             }
@@ -83,7 +110,7 @@ final class NetworkManager {
             switch result {
             case .success(let data):
                 do {
-                    let user = try self.decoder.decode(User.self, from: data)
+                    let user = try self.decoder.decode(type, from: data)
                     completed(.success(user))
                 } catch {
                     completed(.failure(.invalidData))
@@ -94,13 +121,19 @@ final class NetworkManager {
         }
     }
     
-    private func getData(endpoint: String, completionHandler: @escaping (Result<Data, GFError>) -> Void) {
-        guard let url = URL(string: endpoint) else {
-            completionHandler(.failure(.invalidUsername))
-            return
-        }
+    private func getData(url: URL, completionHandler: @escaping (Result<Data, GFError>) -> Void) {
+        let urlString = url.absoluteString
+
+        // In case we have already requested data
+        cancelTask(for: urlString)
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let self = self else {
+                return
+            }
+            
+            self.currentTasks.removeValue(forKey: urlString)
+            
             if let _ = error {
                 completionHandler(.failure(.unableToComplete))
                 return
@@ -118,6 +151,25 @@ final class NetworkManager {
             
             completionHandler(.success(data))
         }
+
+        currentTasks[urlString] = task
         task.resume()
+    }
+    
+    private func makeUrl(with path: String, query: [String: String]? = nil) -> URL? {
+        var urlComponents = baseUrl
+        urlComponents.path = path
+        
+        if let query = query {
+            var queryItems = [URLQueryItem]()
+            
+            for (key, value) in query {
+                queryItems.append(URLQueryItem(name: key, value: value))
+            }
+            
+            urlComponents.queryItems = queryItems
+        }
+
+        return urlComponents.url
     }
 }
