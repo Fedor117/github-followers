@@ -99,6 +99,7 @@ final class FollowerListViewController: GFDataLoadingViewController {
     private func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.makeThreeColumnFlowLayout(in: view))
         collectionView.delegate = self
+        collectionView.prefetchDataSource = self
 
         view.addSubview(collectionView)
 
@@ -119,7 +120,7 @@ final class FollowerListViewController: GFDataLoadingViewController {
         let searchController = UISearchController()
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
-        searchController.searchBar.placeholder = "Search for a username"
+        searchController.searchBar.placeholder = "Search for a person"
         searchController.obscuresBackgroundDuringPresentation = false
         
         navigationItem.searchController = searchController
@@ -158,7 +159,6 @@ final class FollowerListViewController: GFDataLoadingViewController {
 
 // MARK: - UICollectionViewDelegate
 extension FollowerListViewController: UICollectionViewDelegate {
-    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
@@ -172,7 +172,7 @@ extension FollowerListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let activeArray = isSearching ? filteredFollowers : followers
-        let destinationViewController = UserInfoViewController(username: activeArray[indexPath.item].login)
+        let destinationViewController = UserInfoViewController(user: activeArray[indexPath.item])
         destinationViewController.delegate = self
 
         let navigationController = UINavigationController(rootViewController: destinationViewController)
@@ -200,6 +200,21 @@ extension FollowerListViewController: UISearchBarDelegate {
         isSearching = false
 
         updateData(on: followers)
+    }
+}
+
+// MARK: - UICollectionViewDataSourcePrefetching
+extension FollowerListViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            NetworkManager.shared.prefetchImage(from: followers[indexPath.row].avatarUrl)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            NetworkManager.shared.cancelTask(for: followers[indexPath.row].avatarUrl)
+        }
     }
 }
 

@@ -9,12 +9,15 @@
 import UIKit
 
 final class NetworkManager {
+    typealias DataHandler = ((Result<Data, GFError>) -> Void)
 
     static let shared = NetworkManager()
 
-    private let cache = NSCache<NSString, UIImage>()
+    private let cache = Cache<NSString, UIImage>()
     private let decoder: JSONDecoder
-    private var currentTasks = [String: URLSessionDataTask]()
+    
+    private var currentTasks: [URL: URLSessionDataTask] = [:]
+    private var pendingHandlers: [URL: [(Result<Data, GFError>) -> Void]] = [:]
     
     private var baseUrl: URLComponents {
         var urlComponents = URLComponents()
@@ -29,9 +32,35 @@ final class NetworkManager {
         decoder.dateDecodingStrategy = .iso8601
     }
     
-    func downloadImage(from urlString: String, completed: @escaping (Result<UIImage, GFError>) -> Void) {
+    func prefetchImage(from urlString: String) {
         let cacheKey = NSString(string: urlString)
-        if let image = cache.object(forKey: cacheKey) {
+        if let _ = cache[cacheKey] {
+            return
+        }
+
+        guard let url = URL(string: urlString) else {
+            return
+        }
+
+        getData(fromUrl: url) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+
+            switch result {
+            case .success(let data):
+                if let image = UIImage(data: data) {
+                    self.cache[cacheKey] = image
+                }
+            case .failure(_):
+                break
+            }
+        }
+    }
+
+    func getImage(from urlString: String, then completed: @escaping (Result<UIImage, GFError>) -> Void) {
+        let cacheKey = NSString(string: urlString)
+        if let image = cache[cacheKey] {
             completed(.success(image))
             return
         }
@@ -41,7 +70,7 @@ final class NetworkManager {
             return
         }
         
-        getData(url: url) { [weak self] result in
+        getData(fromUrl: url) { [weak self] result in
             guard let self = self else {
                 return
             }
@@ -53,7 +82,7 @@ final class NetworkManager {
                     return
                 }
                 
-                self.cache.setObject(image, forKey: cacheKey)
+                self.cache[cacheKey] = image
                 completed(.success(image))
 
             case .failure(let error):
@@ -62,7 +91,7 @@ final class NetworkManager {
         }
     }
     
-    func getFollowers(for username: String, page: Int, completed: @escaping (Result<[Follower], GFError>) -> Void) {
+    func getFollowers(for username: String, page: Int, then completed: @escaping (Result<[Follower], GFError>) -> Void) {
         guard let url = makeUrl(with: "/users/\(username)/followers", query: ["per_page": "\(Config.numberOfItemsPerPage)", "page": String(page)]) else {
                 completed(.failure(.invalidUrl))
                 return
@@ -78,7 +107,7 @@ final class NetworkManager {
         }
     }
     
-    func getUserData(for username: String, completed: @escaping (Result<User, GFError>) -> Void) {
+    func getUserData(for username: String, then completed: @escaping (Result<User, GFError>) -> Void) {
         guard let url = makeUrl(with: "/users/\(username)") else {
                 completed(.failure(.invalidUrl))
                 return
@@ -93,16 +122,30 @@ final class NetworkManager {
             }
         }
     }
-
+    
     func cancelTask(for urlString: String) {
-        if let currentTask = currentTasks[urlString], URLSessionDataTask.State.canceling != currentTask.state {
-            currentTask.cancel()
+        URLSession.shared.getTasksWithCompletionHandler { [weak self] (dataTasks, uploadTasks, downloadTasks) in
+            guard let self = self else {
+                return
+            }
             
+            for dataTask in dataTasks {
+                guard let url = dataTask.currentRequest?.url else {
+                    continue
+                }
+                
+                if url.absoluteString == urlString {
+                    self.currentTasks.removeValue(forKey: url)
+                    self.pendingHandlers.removeValue(forKey: url) // No need to pass an error to handlers
+                    
+                    dataTask.cancel()
+                }
+            }
         }
     }
     
-    private func getDecodedData<T: Codable>(url: URL, type: T.Type, completed: @escaping (Result<T, GFError>) ->Void) {
-        getData(url: url) { [weak self] result in
+    private func getDecodedData<T: Codable>(url: URL, type: T.Type, then completed: @escaping (Result<T, GFError>) ->Void) {
+        getData(fromUrl: url) { [weak self] result in
             guard let self = self else {
                 return
             }
@@ -121,38 +164,55 @@ final class NetworkManager {
         }
     }
     
-    private func getData(url: URL, completionHandler: @escaping (Result<Data, GFError>) -> Void) {
-        let urlString = url.absoluteString
-
-        // In case we have already requested data
-        cancelTask(for: urlString)
-        
+    private func getData(fromUrl url: URL, then completed: @escaping (Result<Data, GFError>) -> Void) {
+        if currentTasks[url] != nil {
+            addDataHandlerToPendgingQueue(completed, for: url)
+            return
+        }
+ 
         let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard let self = self else {
                 return
             }
             
-            self.currentTasks.removeValue(forKey: urlString)
+            self.currentTasks.removeValue(forKey: url)
+
+            guard let handlers = self.pendingHandlers[url] else {
+                return
+            }
             
             if let _ = error {
-                completionHandler(.failure(.unableToComplete))
+                for handler in handlers {
+                    handler(.failure(.unableToComplete))
+                }
                 return
             }
             
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completionHandler(.failure(.invalidResponse))
+                for handler in handlers {
+                    handler(.failure(.unableToComplete))
+                }
                 return
             }
             
             guard let data = data else {
-                completionHandler(.failure(.invalidData))
+                for handler in handlers {
+                    handler(.failure(.unableToComplete))
+                }
                 return
             }
             
-            completionHandler(.success(data))
+            for handler in handlers {
+                handler(.success(data))
+            }
+            
+            self.pendingHandlers.removeValue(forKey: url)
         }
+        
+        addDataHandlerToPendgingQueue(completed, for: url)
+        
+        currentTasks[url] = task
 
-        currentTasks[urlString] = task
         task.resume()
     }
     
@@ -171,5 +231,16 @@ final class NetworkManager {
         }
 
         return urlComponents.url
+    }
+    
+    private func addDataHandlerToPendgingQueue(_ dataHandler: @escaping (Result<Data, GFError>) -> Void, for url: URL) {
+        if var handlers = pendingHandlers[url] {
+            handlers.append(dataHandler)
+            pendingHandlers[url] = handlers
+        } else {
+            var handlers = [(Result<Data, GFError>) -> Void]()
+            handlers.append(dataHandler)
+            pendingHandlers[url] = handlers
+        }
     }
 }

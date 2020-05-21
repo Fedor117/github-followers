@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D5EAF4F2462D8D20081BF41 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5EAF4E2462D8D20081BF41 /* Cache.swift */; };
 		4D93EA922451D8A700D8B42A /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D93EA912451D8A700D8B42A /* PersistenceManager.swift */; };
 		4DCAD7F12458DBE300669C45 /* GFDataLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCAD7F02458DBE300669C45 /* GFDataLoadingViewController.swift */; };
 		600101C723C0C11D001BE72E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600101C623C0C11D001BE72E /* AppDelegate.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D5EAF4E2462D8D20081BF41 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		4D93EA912451D8A700D8B42A /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		4DCAD7F02458DBE300669C45 /* GFDataLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFDataLoadingViewController.swift; sourceTree = "<group>"; };
 		600101C323C0C11D001BE72E /* github-followers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "github-followers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,6 +280,7 @@
 				60BA890A23C5284F00956831 /* GFError.swift */,
 				600BC9E023CBCB7300814DAE /* UIHelper.swift */,
 				602B23FA23EC4FE700130573 /* Constants.swift */,
+				4D5EAF4E2462D8D20081BF41 /* Cache.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				60831F4E23CE5C6C0041E820 /* UserInfoViewController.swift in Sources */,
 				600101E323C0DBB1001BE72E /* FollowerListViewController.swift in Sources */,
 				60365BA223C3A5610026CC34 /* UIViewController+Ext.swift in Sources */,
+				4D5EAF4F2462D8D20081BF41 /* Cache.swift in Sources */,
 				600101C723C0C11D001BE72E /* AppDelegate.swift in Sources */,
 				600101DF23C0CABE001BE72E /* GFButton.swift in Sources */,
 				60601DF02442670F00F20B28 /* GFRepoItemViewController.swift in Sources */,

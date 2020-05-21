@@ -25,7 +25,7 @@ final class GFAvatarImageView: UIImageView {
     func setImage(urlString: String) {
         image = GFAvatarImageView.placeholderImage
 
-        NetworkManager.shared.downloadImage(from: urlString) { [weak self] result in
+        NetworkManager.shared.getImage(from: urlString) { [weak self] result in
             guard let self = self else {
                 return
             }

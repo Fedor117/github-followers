@@ -19,12 +19,12 @@ final class UserInfoViewController: GFDataLoadingViewController {
     private let itemViewTwo = UIView()
     private let dateLabel = GFBodyLabel(textAlignment: .center)
 
-    private var username: String
+    private var user: Follower
 
     weak var delegate: FollowerListViewControllerDelegate?
     
-    init(username: String) {
-        self.username = username
+    init(user: Follower) {
+        self.user = user
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -108,7 +108,7 @@ final class UserInfoViewController: GFDataLoadingViewController {
     private func getUserData() {
         showLoadingView()
         
-        NetworkManager.shared.getUserData(for: username) { [weak self] result in
+        NetworkManager.shared.getUserData(for: user.login) { [weak self] result in
             guard let self = self else {
                 return
             }

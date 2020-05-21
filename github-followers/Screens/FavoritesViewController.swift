@@ -49,6 +49,7 @@ final class FavoritesViewController: GFDataLoadingViewController {
         tableView.rowHeight = 80
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.prefetchDataSource = self
         tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseId)
     }
 }
@@ -82,5 +83,20 @@ extension FavoritesViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.reuseId) as! FavoriteCell
         cell.setFavorite(favorites[indexPath.row])
         return cell
+    }
+}
+
+// MARK: - UITableViewDataSourcePrefetching
+extension FavoritesViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            NetworkManager.shared.prefetchImage(from: favorites[indexPath.row].avatarUrl)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            NetworkManager.shared.cancelTask(for: favorites[indexPath.row].avatarUrl)
+        }
     }
 }
