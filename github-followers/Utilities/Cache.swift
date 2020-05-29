@@ -66,7 +66,9 @@ private extension Cache {
 
         init(_ key: Key) { self.key = key }
 
-        override var hash: Int { return key.hashValue }
+        override var hash: Int {
+            key.hashValue
+        }
 
         override func isEqual(_ object: Any?) -> Bool {
             guard let value = object as? WrappedKey else {
@@ -81,7 +83,9 @@ private extension Cache {
 // MARK: - Subscript for Entry
 extension Cache {
     subscript(key: Key) -> Value? {
-        get { return value(forKey: key) }
+        get {
+            value(forKey: key)
+        }
         set {
             guard let value = newValue else {
                 removeValue(forKey: key)

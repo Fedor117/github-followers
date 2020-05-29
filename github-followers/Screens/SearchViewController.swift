@@ -14,7 +14,7 @@ final class SearchViewController: UIViewController {
     private let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
 
     var isUsernameEmpty: Bool {
-        return usernameTextField.text?.isEmpty ?? true
+        usernameTextField.text?.isEmpty ?? true
     }
 
 
@@ -39,7 +39,7 @@ final class SearchViewController: UIViewController {
     }
     
     private func makeDismissKeyboardTapGesture() -> UITapGestureRecognizer {
-        return UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
     }
     
     private func configureLogoImageView() {

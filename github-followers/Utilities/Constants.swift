@@ -16,7 +16,7 @@ enum Config {
 enum ImageAssets {
     static let githubLogo = "gh-logo"
     static let emptyStateLogo = "empty-state-logo"
-    static let avatarPlaceholder = "avater-placeholder"
+    static let avatarPlaceholder = "avatar-placeholder"
 }
 
 enum SFSymbols {
@@ -49,6 +49,6 @@ enum DeviceTypes {
     static let isiPad = idiom == .pad && ScreenSize.maxLenght >= 1024.0
     
     static func isiPhoneXAspectRatio() -> Bool {
-        return isiPhoneX || isiPhoneXsMaxAndXr
+        isiPhoneX || isiPhoneXsMaxAndXr
     }
 }

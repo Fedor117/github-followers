@@ -76,7 +76,7 @@ extension FavoritesViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension FavoritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favorites.count
+        favorites.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

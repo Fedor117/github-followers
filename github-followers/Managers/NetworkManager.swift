@@ -9,7 +9,7 @@
 import UIKit
 
 final class NetworkManager {
-    typealias DataHandler = ((Result<Data, GFError>) -> Void)
+    typealias DataHandler = (Result<Data, GFError>) -> Void
 
     static let shared = NetworkManager()
 
@@ -166,7 +166,7 @@ final class NetworkManager {
     
     private func getData(fromUrl url: URL, then completed: @escaping (Result<Data, GFError>) -> Void) {
         if currentTasks[url] != nil {
-            addDataHandlerToPendgingQueue(completed, for: url)
+            addDataHandlerToPendingQueue(completed, for: url)
             return
         }
  
@@ -209,7 +209,7 @@ final class NetworkManager {
             self.pendingHandlers.removeValue(forKey: url)
         }
         
-        addDataHandlerToPendgingQueue(completed, for: url)
+        addDataHandlerToPendingQueue(completed, for: url)
         
         currentTasks[url] = task
 
@@ -233,7 +233,7 @@ final class NetworkManager {
         return urlComponents.url
     }
     
-    private func addDataHandlerToPendgingQueue(_ dataHandler: @escaping (Result<Data, GFError>) -> Void, for url: URL) {
+    private func addDataHandlerToPendingQueue(_ dataHandler: @escaping (Result<Data, GFError>) -> Void, for url: URL) {
         if var handlers = pendingHandlers[url] {
             handlers.append(dataHandler)
             pendingHandlers[url] = handlers

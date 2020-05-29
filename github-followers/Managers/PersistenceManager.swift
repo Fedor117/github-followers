@@ -45,6 +45,6 @@ class PersistenceManager {
     }
     
     func isAlreadyFavorite(follower: Follower) -> Bool {
-        return favoriteFollowers.contains(follower)
+        favoriteFollowers.contains(follower)
     }
 }
