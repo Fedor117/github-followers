@@ -8,6 +8,4 @@
 
 import Foundation
 
-protocol ManagedDataServicing: UsersServicing, FollowersServicing, AvatarsServicing {
-    
-}
+protocol ManagedDataServicing: UsersServicing, FollowersServicing, AvatarsServicing, FavoritesServicing {}

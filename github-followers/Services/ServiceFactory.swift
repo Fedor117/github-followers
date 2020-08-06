@@ -11,6 +11,7 @@ import Foundation
 protocol ServiceFactory {
     func makeNetworkService() -> NetworkServicing
     func makeCacheService() -> CacheServicing
+    func makeFavoritesService() -> FavoritesServicing
     func makeFollowersService(apiClient: APIClient) -> FollowersServicing
     func makeUsersService(apiClient: APIClient) -> UsersServicing
     func makeAvatarsService(apiClient: APIClient) -> AvatarsServicing
@@ -18,6 +19,7 @@ protocol ServiceFactory {
     func makeManagedDataService(usersService: UsersServicing,
                                 followersService: FollowersServicing,
                                 avatarService: AvatarsServicing,
+                                favoritesService: FavoritesServicing,
                                 cacheService: CacheServicing)
         -> ManagedDataServicing
 }

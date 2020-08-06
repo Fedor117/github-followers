@@ -17,6 +17,12 @@ final class SimpleServiceFactory: ServiceFactory {
         return RAMCacheService()
     }
     
+    func makeFavoritesService() -> FavoritesServicing {
+        return FavoritesService(storage: UserDefaults.standard,
+                                encoder: PropertyListEncoder(),
+                                decoder: PropertyListDecoder())
+    }
+    
     func makeFollowersService(apiClient: APIClient) -> FollowersServicing {
         let followersDecoder = JSONDecoder()
         followersDecoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -39,12 +45,14 @@ final class SimpleServiceFactory: ServiceFactory {
     func makeManagedDataService(usersService: UsersServicing,
                                 followersService: FollowersServicing,
                                 avatarService: AvatarsServicing,
+                                favoritesService: FavoritesServicing,
                                 cacheService: CacheServicing)
         -> ManagedDataServicing {
 
         return ManagedDataService(usersService: usersService,
                                   followersService: followersService,
                                   avatarService: avatarService,
+                                  favoritesService: favoritesService,
                                   cacheService: cacheService)
     }
 }

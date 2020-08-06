@@ -13,6 +13,10 @@ enum Config {
     static let numberOfItemsPerPage = 100
 }
 
+enum Keys {
+    static let favorites = "favorites"
+}
+
 enum CellIds {
     static let follower = "FollowerCell"
     static let favorite = "FavoriteCell"
