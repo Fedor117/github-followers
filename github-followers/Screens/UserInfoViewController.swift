@@ -14,6 +14,8 @@ protocol UserInfoViewControllerDelegate: class {
 }
 
 final class UserInfoViewController: GFDataLoadingViewController {
+    private let dataService: ManagedDataServicing
+    
     private let headerView = UIView()
     private let itemViewOne = UIView()
     private let itemViewTwo = UIView()
@@ -23,8 +25,9 @@ final class UserInfoViewController: GFDataLoadingViewController {
 
     weak var delegate: FollowerListViewControllerDelegate?
     
-    init(user: Follower) {
+    init(user: Follower, dataService: ManagedDataServicing) {
         self.user = user
+        self.dataService = dataService
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -60,7 +63,7 @@ final class UserInfoViewController: GFDataLoadingViewController {
         let followerItemVC = GFFollowerItemInfoViewController(user: user)
         followerItemVC.delegate = self
         
-        self.add(childViewController: GFUserInfoHeaderViewController(user: user), to: self.headerView)
+        self.add(childViewController: GFUserInfoHeaderViewController(user: user, dataService: dataService), to: self.headerView)
         self.add(childViewController: repoItemVC, to: self.itemViewOne)
         self.add(childViewController: followerItemVC, to: self.itemViewTwo)
 
@@ -108,7 +111,7 @@ final class UserInfoViewController: GFDataLoadingViewController {
     private func getUserData() {
         showLoadingView()
         
-        NetworkManager.shared.getUserData(for: user.login) { [weak self] result in
+        dataService.getUser(for: user.login) { [weak self] result in
             guard let self = self else {
                 return
             }

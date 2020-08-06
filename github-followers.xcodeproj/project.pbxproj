@@ -28,6 +28,8 @@
 		602B23F923EC49AC00130573 /* GFSecondaryTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602B23F823EC49AC00130573 /* GFSecondaryTitleLabel.swift */; };
 		602B23FB23EC4FE700130573 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602B23FA23EC4FE700130573 /* Constants.swift */; };
 		602B23FD23EDA2BE00130573 /* GFItemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602B23FC23EDA2BE00130573 /* GFItemInfoView.swift */; };
+		602EC55F24DC7F55001EFF2D /* ServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EC55E24DC7F55001EFF2D /* ServiceFactory.swift */; };
+		602EC56124DC7FDB001EFF2D /* SimpleServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EC56024DC7FDB001EFF2D /* SimpleServiceFactory.swift */; };
 		60365B9E23C39D7B0026CC34 /* GFBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60365B9D23C39D7B0026CC34 /* GFBodyLabel.swift */; };
 		60365BA023C39E270026CC34 /* GFAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60365B9F23C39E270026CC34 /* GFAlertViewController.swift */; };
 		60365BA223C3A5610026CC34 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60365BA123C3A5610026CC34 /* UIViewController+Ext.swift */; };
@@ -40,8 +42,27 @@
 		60601DF4244267A300F20B28 /* GFItemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60601DF3244267A300F20B28 /* GFItemInfoViewController.swift */; };
 		60831F4E23CE5C6C0041E820 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60831F4D23CE5C6C0041E820 /* UserInfoViewController.swift */; };
 		608E0821244F937B00E8FB9B /* GFFollowerItemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608E0820244F937B00E8FB9B /* GFFollowerItemInfoViewController.swift */; };
-		60BA890823C3BF6800956831 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BA890723C3BF6800956831 /* NetworkManager.swift */; };
+		60A69A6324D471DA00E80860 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A69A6224D471DA00E80860 /* APIClient.swift */; };
+		60A69A6524D471EA00E80860 /* AvatarsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A69A6424D471EA00E80860 /* AvatarsService.swift */; };
+		60A69A6724D4720300E80860 /* UsersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A69A6624D4720300E80860 /* UsersService.swift */; };
+		60A69A6924D4728100E80860 /* GitHubAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A69A6824D4728100E80860 /* GitHubAPIClient.swift */; };
+		60A69A6F24D4755A00E80860 /* FollowersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A69A6E24D4755A00E80860 /* FollowersService.swift */; };
+		60A69A7524D4836000E80860 /* NetworkServicing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A69A7424D4836000E80860 /* NetworkServicing.swift */; };
+		60A69A7724D4839300E80860 /* FollowersServicing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A69A7624D4839300E80860 /* FollowersServicing.swift */; };
+		60A69A7924D4844300E80860 /* UsersServicing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A69A7824D4844300E80860 /* UsersServicing.swift */; };
+		60A69A7B24D4848700E80860 /* AvatarsServicing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A69A7A24D4848700E80860 /* AvatarsServicing.swift */; };
+		60A69A7D24D485A000E80860 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A69A7C24D485A000E80860 /* Avatar.swift */; };
+		60A69A7F24D485FC00E80860 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A69A7E24D485FC00E80860 /* NetworkService.swift */; };
+		60A69A8424D486E500E80860 /* RAMCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A69A8324D486E500E80860 /* RAMCacheService.swift */; };
+		60A69A8624D486FE00E80860 /* CacheServicing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A69A8524D486FE00E80860 /* CacheServicing.swift */; };
 		60BA890B23C5284F00956831 /* GFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BA890A23C5284F00956831 /* GFError.swift */; };
+		60E25CA524DC619100670F7D /* ServiceUserCellUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E25CA424DC619100670F7D /* ServiceUserCellUpdateDelegate.swift */; };
+		60E25CA724DC61CF00670F7D /* UserCellAvatarUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E25CA624DC61CF00670F7D /* UserCellAvatarUpdateDelegate.swift */; };
+		60E25CAA24DC633F00670F7D /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E25CA924DC633F00670F7D /* UserCell.swift */; };
+		60E2724C24D76BA3009E209B /* URLFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E2724B24D76BA3009E209B /* URLFactory.swift */; };
+		60E2724E24D76BBE009E209B /* SimpleURLFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E2724D24D76BBE009E209B /* SimpleURLFactory.swift */; };
+		60F0589424D8357000C2F6FE /* ManagedDataServicing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F0589324D8357000C2F6FE /* ManagedDataServicing.swift */; };
+		60F0589624D836C900C2F6FE /* ManagedDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F0589524D836C900C2F6FE /* ManagedDataService.swift */; };
 		60FE5B29244F97BF00F4CDE9 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FE5B28244F97BF00F4CDE9 /* Date+Ext.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +90,8 @@
 		602B23F823EC49AC00130573 /* GFSecondaryTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFSecondaryTitleLabel.swift; sourceTree = "<group>"; };
 		602B23FA23EC4FE700130573 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		602B23FC23EDA2BE00130573 /* GFItemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFItemInfoView.swift; sourceTree = "<group>"; };
+		602EC55E24DC7F55001EFF2D /* ServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactory.swift; sourceTree = "<group>"; };
+		602EC56024DC7FDB001EFF2D /* SimpleServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleServiceFactory.swift; sourceTree = "<group>"; };
 		60365B9D23C39D7B0026CC34 /* GFBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFBodyLabel.swift; sourceTree = "<group>"; };
 		60365B9F23C39E270026CC34 /* GFAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAlertViewController.swift; sourceTree = "<group>"; };
 		60365BA123C3A5610026CC34 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
@@ -81,8 +104,27 @@
 		60601DF3244267A300F20B28 /* GFItemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFItemInfoViewController.swift; sourceTree = "<group>"; };
 		60831F4D23CE5C6C0041E820 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		608E0820244F937B00E8FB9B /* GFFollowerItemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFFollowerItemInfoViewController.swift; sourceTree = "<group>"; };
-		60BA890723C3BF6800956831 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		60A69A6224D471DA00E80860 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		60A69A6424D471EA00E80860 /* AvatarsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarsService.swift; sourceTree = "<group>"; };
+		60A69A6624D4720300E80860 /* UsersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersService.swift; sourceTree = "<group>"; };
+		60A69A6824D4728100E80860 /* GitHubAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAPIClient.swift; sourceTree = "<group>"; };
+		60A69A6E24D4755A00E80860 /* FollowersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersService.swift; sourceTree = "<group>"; };
+		60A69A7424D4836000E80860 /* NetworkServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServicing.swift; sourceTree = "<group>"; };
+		60A69A7624D4839300E80860 /* FollowersServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersServicing.swift; sourceTree = "<group>"; };
+		60A69A7824D4844300E80860 /* UsersServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersServicing.swift; sourceTree = "<group>"; };
+		60A69A7A24D4848700E80860 /* AvatarsServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarsServicing.swift; sourceTree = "<group>"; };
+		60A69A7C24D485A000E80860 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
+		60A69A7E24D485FC00E80860 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		60A69A8324D486E500E80860 /* RAMCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMCacheService.swift; sourceTree = "<group>"; };
+		60A69A8524D486FE00E80860 /* CacheServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheServicing.swift; sourceTree = "<group>"; };
 		60BA890A23C5284F00956831 /* GFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFError.swift; sourceTree = "<group>"; };
+		60E25CA424DC619100670F7D /* ServiceUserCellUpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceUserCellUpdateDelegate.swift; sourceTree = "<group>"; };
+		60E25CA624DC61CF00670F7D /* UserCellAvatarUpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellAvatarUpdateDelegate.swift; sourceTree = "<group>"; };
+		60E25CA924DC633F00670F7D /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		60E2724B24D76BA3009E209B /* URLFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLFactory.swift; sourceTree = "<group>"; };
+		60E2724D24D76BBE009E209B /* SimpleURLFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleURLFactory.swift; sourceTree = "<group>"; };
+		60F0589324D8357000C2F6FE /* ManagedDataServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedDataServicing.swift; sourceTree = "<group>"; };
+		60F0589524D836C900C2F6FE /* ManagedDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedDataService.swift; sourceTree = "<group>"; };
 		60FE5B28244F97BF00F4CDE9 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,10 +158,10 @@
 		600101C523C0C11D001BE72E /* github-followers */ = {
 			isa = PBXGroup;
 			children = (
+				600101D423C0C122001BE72E /* Info.plist */,
+				60A69A6D24D4739100E80860 /* Services */,
 				60BA890923C5283E00956831 /* Utilities */,
 				60BA890623C3BF5E00956831 /* Managers */,
-				60365BA923C3B4D90026CC34 /* Model */,
-				600101D423C0C122001BE72E /* Info.plist */,
 				60365BA623C3AB120026CC34 /* Support */,
 				60365BA523C3AAB20026CC34 /* Extensions */,
 				60365BA423C3AA830026CC34 /* Custom Views */,
@@ -237,20 +279,11 @@
 			path = Support;
 			sourceTree = "<group>";
 		};
-		60365BA923C3B4D90026CC34 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				60365BAA23C3B4EB0026CC34 /* Follower.swift */,
-				60365BAC23C3B75B0026CC34 /* User.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		605FFB6A23CA8F3300F8B0F6 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				605FFB6B23CA8F5000F8B0F6 /* FollowerCell.swift */,
-				6007B61B24523EA70018FED1 /* FavoriteCell.swift */,
+				60E25CA824DC631000670F7D /* UserCell */,
+				60E25CA324DC617100670F7D /* Delegates */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -265,10 +298,84 @@
 			path = ItemInfoViewControllers;
 			sourceTree = "<group>";
 		};
+		60A69A6B24D4737100E80860 /* APIClients */ = {
+			isa = PBXGroup;
+			children = (
+				60E2724A24D76B7D009E209B /* Utility */,
+				60A69A6224D471DA00E80860 /* APIClient.swift */,
+				60A69A6824D4728100E80860 /* GitHubAPIClient.swift */,
+			);
+			path = APIClients;
+			sourceTree = "<group>";
+		};
+		60A69A6D24D4739100E80860 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				60F0589224D8355A00C2F6FE /* ManagedDataService */,
+				60A69A8024D4868400E80860 /* CacheService */,
+				60A69A7324D4823F00E80860 /* NetworkingService */,
+				60A69A6B24D4737100E80860 /* APIClients */,
+				60A69A7224D4820C00E80860 /* FollowersService */,
+				60A69A7124D4820100E80860 /* UsersService */,
+				60A69A7024D47B2600E80860 /* AvatarsService */,
+				602EC55E24DC7F55001EFF2D /* ServiceFactory.swift */,
+				602EC56024DC7FDB001EFF2D /* SimpleServiceFactory.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		60A69A7024D47B2600E80860 /* AvatarsService */ = {
+			isa = PBXGroup;
+			children = (
+				60A69A6424D471EA00E80860 /* AvatarsService.swift */,
+				60A69A7A24D4848700E80860 /* AvatarsServicing.swift */,
+				60A69A7C24D485A000E80860 /* Avatar.swift */,
+			);
+			path = AvatarsService;
+			sourceTree = "<group>";
+		};
+		60A69A7124D4820100E80860 /* UsersService */ = {
+			isa = PBXGroup;
+			children = (
+				60365BAC23C3B75B0026CC34 /* User.swift */,
+				60A69A6624D4720300E80860 /* UsersService.swift */,
+				60A69A7824D4844300E80860 /* UsersServicing.swift */,
+			);
+			path = UsersService;
+			sourceTree = "<group>";
+		};
+		60A69A7224D4820C00E80860 /* FollowersService */ = {
+			isa = PBXGroup;
+			children = (
+				60365BAA23C3B4EB0026CC34 /* Follower.swift */,
+				60A69A6E24D4755A00E80860 /* FollowersService.swift */,
+				60A69A7624D4839300E80860 /* FollowersServicing.swift */,
+			);
+			path = FollowersService;
+			sourceTree = "<group>";
+		};
+		60A69A7324D4823F00E80860 /* NetworkingService */ = {
+			isa = PBXGroup;
+			children = (
+				60A69A7424D4836000E80860 /* NetworkServicing.swift */,
+				60A69A7E24D485FC00E80860 /* NetworkService.swift */,
+			);
+			path = NetworkingService;
+			sourceTree = "<group>";
+		};
+		60A69A8024D4868400E80860 /* CacheService */ = {
+			isa = PBXGroup;
+			children = (
+				4D5EAF4E2462D8D20081BF41 /* Cache.swift */,
+				60A69A8324D486E500E80860 /* RAMCacheService.swift */,
+				60A69A8524D486FE00E80860 /* CacheServicing.swift */,
+			);
+			path = CacheService;
+			sourceTree = "<group>";
+		};
 		60BA890623C3BF5E00956831 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				60BA890723C3BF6800956831 /* NetworkManager.swift */,
 				4D93EA912451D8A700D8B42A /* PersistenceManager.swift */,
 			);
 			path = Managers;
@@ -280,9 +387,45 @@
 				60BA890A23C5284F00956831 /* GFError.swift */,
 				600BC9E023CBCB7300814DAE /* UIHelper.swift */,
 				602B23FA23EC4FE700130573 /* Constants.swift */,
-				4D5EAF4E2462D8D20081BF41 /* Cache.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		60E25CA324DC617100670F7D /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				60E25CA424DC619100670F7D /* ServiceUserCellUpdateDelegate.swift */,
+				60E25CA624DC61CF00670F7D /* UserCellAvatarUpdateDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		60E25CA824DC631000670F7D /* UserCell */ = {
+			isa = PBXGroup;
+			children = (
+				605FFB6B23CA8F5000F8B0F6 /* FollowerCell.swift */,
+				6007B61B24523EA70018FED1 /* FavoriteCell.swift */,
+				60E25CA924DC633F00670F7D /* UserCell.swift */,
+			);
+			path = UserCell;
+			sourceTree = "<group>";
+		};
+		60E2724A24D76B7D009E209B /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				60E2724B24D76BA3009E209B /* URLFactory.swift */,
+				60E2724D24D76BBE009E209B /* SimpleURLFactory.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		60F0589224D8355A00C2F6FE /* ManagedDataService */ = {
+			isa = PBXGroup;
+			children = (
+				60F0589324D8357000C2F6FE /* ManagedDataServicing.swift */,
+				60F0589524D836C900C2F6FE /* ManagedDataService.swift */,
+			);
+			path = ManagedDataService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,14 +498,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60A69A6924D4728100E80860 /* GitHubAPIClient.swift in Sources */,
 				60365BA823C3ACBE0026CC34 /* GFAlertContainerView.swift in Sources */,
+				60A69A8424D486E500E80860 /* RAMCacheService.swift in Sources */,
 				60831F4E23CE5C6C0041E820 /* UserInfoViewController.swift in Sources */,
+				60A69A7924D4844300E80860 /* UsersServicing.swift in Sources */,
+				60E2724E24D76BBE009E209B /* SimpleURLFactory.swift in Sources */,
 				600101E323C0DBB1001BE72E /* FollowerListViewController.swift in Sources */,
+				60E2724C24D76BA3009E209B /* URLFactory.swift in Sources */,
 				60365BA223C3A5610026CC34 /* UIViewController+Ext.swift in Sources */,
 				4D5EAF4F2462D8D20081BF41 /* Cache.swift in Sources */,
 				600101C723C0C11D001BE72E /* AppDelegate.swift in Sources */,
 				600101DF23C0CABE001BE72E /* GFButton.swift in Sources */,
 				60601DF02442670F00F20B28 /* GFRepoItemViewController.swift in Sources */,
+				60E25CA524DC619100670F7D /* ServiceUserCellUpdateDelegate.swift in Sources */,
+				60A69A6324D471DA00E80860 /* APIClient.swift in Sources */,
+				602EC55F24DC7F55001EFF2D /* ServiceFactory.swift in Sources */,
+				60F0589424D8357000C2F6FE /* ManagedDataServicing.swift in Sources */,
+				60A69A7724D4839300E80860 /* FollowersServicing.swift in Sources */,
+				60A69A8624D486FE00E80860 /* CacheServicing.swift in Sources */,
+				60A69A6724D4720300E80860 /* UsersService.swift in Sources */,
 				600BC9E923CD1F0900814DAE /* GFEmptyStateView.swift in Sources */,
 				602B23F923EC49AC00130573 /* GFSecondaryTitleLabel.swift in Sources */,
 				600101DB23C0C697001BE72E /* SearchViewController.swift in Sources */,
@@ -372,19 +527,28 @@
 				6007B61C24523EA70018FED1 /* FavoriteCell.swift in Sources */,
 				605FFB6E23CA8FD700F8B0F6 /* GFAvatarImageView.swift in Sources */,
 				60365BA023C39E270026CC34 /* GFAlertViewController.swift in Sources */,
+				60F0589624D836C900C2F6FE /* ManagedDataService.swift in Sources */,
+				60A69A6524D471EA00E80860 /* AvatarsService.swift in Sources */,
 				60365BAB23C3B4EB0026CC34 /* Follower.swift in Sources */,
 				600101DD23C0C6D6001BE72E /* FavoritesViewController.swift in Sources */,
+				60E25CAA24DC633F00670F7D /* UserCell.swift in Sources */,
 				600101E523C0F210001BE72E /* GFTitleLabel.swift in Sources */,
 				600101C923C0C11D001BE72E /* SceneDelegate.swift in Sources */,
 				608E0821244F937B00E8FB9B /* GFFollowerItemInfoViewController.swift in Sources */,
+				60A69A7B24D4848700E80860 /* AvatarsServicing.swift in Sources */,
+				60A69A6F24D4755A00E80860 /* FollowersService.swift in Sources */,
+				60A69A7D24D485A000E80860 /* Avatar.swift in Sources */,
+				602EC56124DC7FDB001EFF2D /* SimpleServiceFactory.swift in Sources */,
 				60BA890B23C5284F00956831 /* GFError.swift in Sources */,
 				600BC9E123CBCB7300814DAE /* UIHelper.swift in Sources */,
+				60A69A7524D4836000E80860 /* NetworkServicing.swift in Sources */,
 				4DCAD7F12458DBE300669C45 /* GFDataLoadingViewController.swift in Sources */,
-				60BA890823C3BF6800956831 /* NetworkManager.swift in Sources */,
 				600101E123C0CF06001BE72E /* GFTextField.swift in Sources */,
 				60FE5B29244F97BF00F4CDE9 /* Date+Ext.swift in Sources */,
 				60365B9E23C39D7B0026CC34 /* GFBodyLabel.swift in Sources */,
 				602B23FD23EDA2BE00130573 /* GFItemInfoView.swift in Sources */,
+				60E25CA724DC61CF00670F7D /* UserCellAvatarUpdateDelegate.swift in Sources */,
+				60A69A7F24D485FC00E80860 /* NetworkService.swift in Sources */,
 				60601DF4244267A300F20B28 /* GFItemInfoViewController.swift in Sources */,
 				602B23F723EC494200130573 /* GFUserInfoHeaderViewController.swift in Sources */,
 				602B23FB23EC4FE700130573 /* Constants.swift in Sources */,
