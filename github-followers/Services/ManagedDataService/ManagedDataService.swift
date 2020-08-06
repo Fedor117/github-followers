@@ -12,15 +12,18 @@ final class ManagedDataService: ManagedDataServicing {
     private let usersService: UsersServicing
     private let followersService: FollowersServicing
     private let avatarsService: AvatarsServicing
+    private let favoritesService: FavoritesServicing
     private let cacheService: CacheServicing
     
     init(usersService: UsersServicing,
          followersService: FollowersServicing,
          avatarService: AvatarsServicing,
+         favoritesService: FavoritesServicing,
          cacheService: CacheServicing) {
         self.usersService = usersService
         self.followersService = followersService
         self.avatarsService = avatarService
+        self.favoritesService = favoritesService
         self.cacheService = cacheService
     }
     
@@ -56,5 +59,17 @@ final class ManagedDataService: ManagedDataServicing {
                 handler(result)
             }
         }
+    }
+    
+    var favorites: [Follower] {
+        return favoritesService.favorites
+    }
+
+    func addToFavorites(follower: Follower) {
+        favoritesService.addToFavorites(follower: follower)
+    }
+
+    func removeFromFavorites(follower: Follower) {
+        favoritesService.removeFromFavorites(follower: follower)
     }
 }

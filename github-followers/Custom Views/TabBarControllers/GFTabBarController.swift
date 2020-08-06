@@ -43,6 +43,7 @@ final class GFTabBarController: UITabBarController {
         let dataService = factory.makeManagedDataService(usersService: factory.makeUsersService(apiClient: apiClient),
                                                          followersService: factory.makeFollowersService(apiClient: apiClient),
                                                          avatarService: factory.makeAvatarsService(apiClient: apiClient),
+                                                         favoritesService: factory.makeFavoritesService(),
                                                          cacheService: factory.makeCacheService())
 
         return dataService

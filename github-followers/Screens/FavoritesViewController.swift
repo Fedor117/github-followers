@@ -38,11 +38,14 @@ final class FavoritesViewController: GFDataLoadingViewController {
     }
     
     private func getFavorites() {
-        let favorites = PersistenceManager.shared.favoriteFollowers
+        let favorites = dataService.favorites
         if favorites.isEmpty {
             showEmptyStateView(message: "No favorites?\nAdd on the follower screen.", in: view)
         } else {
             self.favorites = favorites
+
+            tableView.reloadData()
+
             DispatchQueue.main.async {
                 self.view.bringSubviewToFront(self.tableView)
             }
@@ -85,7 +88,7 @@ extension FavoritesViewController: UITableViewDelegate {
         favorites.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .top)
         
-        PersistenceManager.shared.removeFromFavorites(follower: favorite)
+        dataService.removeFromFavorites(follower: favorite)
     }
 }
 

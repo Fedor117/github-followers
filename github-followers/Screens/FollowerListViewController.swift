@@ -153,7 +153,7 @@ final class FollowerListViewController: GFDataLoadingViewController {
             
             switch result {
             case .success(let user):
-                PersistenceManager.shared.addToFavorites(follower: Follower(login: user.login, avatarUrl: user.avatarUrl))
+                self.dataService.addToFavorites(follower: Follower(login: user.login, avatarUrl: user.avatarUrl))
                 
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
