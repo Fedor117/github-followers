@@ -16,6 +16,8 @@ final class FollowerListViewController: GFDataLoadingViewController {
     enum Section {
         case main
     }
+    
+    private let dataService: ManagedDataServicing
 
     private var followers: [Follower] = []
     private var filteredFollowers: [Follower] = []
@@ -26,8 +28,9 @@ final class FollowerListViewController: GFDataLoadingViewController {
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
     
-    init(username: String) {
+    init(username: String, dataService: ManagedDataServicing) {
         self.username = username
+        self.dataService = dataService
 
         super.init(nibName: nil, bundle: nil)
 
@@ -58,8 +61,8 @@ final class FollowerListViewController: GFDataLoadingViewController {
     private func getFollowers(username: String, page: Int) {
         showLoadingView()
         
-        NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
-            guard let self = self else {
+        dataService.getFollowers(for: username, page: page) { [weak self] result in
+           guard let self = self else {
                 return
             }
             
@@ -104,12 +107,16 @@ final class FollowerListViewController: GFDataLoadingViewController {
         view.addSubview(collectionView)
 
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseId)
+        collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: CellIds.follower)
     }
     
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Follower>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, follower) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCell.reuseId, for: indexPath) as! FollowerCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIds.follower, for: indexPath) as! FollowerCell
+            if cell.avatarUpdateDelegate == nil {
+                cell.avatarUpdateDelegate = ServiceUserCellUpdateDelegate(dataService: self.dataService)
+            }
+            
             cell.setFollower(follower)
             
             return cell
@@ -139,10 +146,8 @@ final class FollowerListViewController: GFDataLoadingViewController {
     @objc private func addButtonTapped() {
         showLoadingView()
         
-        NetworkManager.shared.getUserData(for: username) { [weak self] result in
-            guard let self = self else {
-                return
-            }
+        dataService.getUser(for: username) { [weak self] result in
+            guard let self = self else { return }
             
             self.dismissLoadingView()
             
@@ -172,7 +177,10 @@ extension FollowerListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let activeArray = isSearching ? filteredFollowers : followers
-        let destinationViewController = UserInfoViewController(user: activeArray[indexPath.item])
+        let destinationViewController = UserInfoViewController(
+            user: activeArray[indexPath.item],
+            dataService: dataService)
+
         destinationViewController.delegate = self
 
         let navigationController = UINavigationController(rootViewController: destinationViewController)
@@ -206,15 +214,11 @@ extension FollowerListViewController: UISearchBarDelegate {
 // MARK: - UICollectionViewDataSourcePrefetching
 extension FollowerListViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        for indexPath in indexPaths {
-            NetworkManager.shared.prefetchImage(from: followers[indexPath.row].avatarUrl)
-        }
+        // TODO FV: implement
     }
     
     func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
-        for indexPath in indexPaths {
-            NetworkManager.shared.cancelTask(for: followers[indexPath.row].avatarUrl)
-        }
+        // TODO FV: implement
     }
 }
 

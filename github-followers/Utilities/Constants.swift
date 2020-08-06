@@ -13,6 +13,11 @@ enum Config {
     static let numberOfItemsPerPage = 100
 }
 
+enum CellIds {
+    static let follower = "FollowerCell"
+    static let favorite = "FavoriteCell"
+}
+
 enum ImageAssets {
     static let githubLogo = "gh-logo"
     static let emptyStateLogo = "empty-state-logo"

@@ -9,6 +9,8 @@
 import UIKit
 
 final class SearchViewController: UIViewController {
+    private let dataService: ManagedDataServicing
+    
     private let logoImageView = UIImageView()
     private let usernameTextField = GFTextField()
     private let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
@@ -17,7 +19,16 @@ final class SearchViewController: UIViewController {
         usernameTextField.text?.isEmpty ?? true
     }
 
-
+    init(dataService: ManagedDataServicing) {
+        self.dataService = dataService
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -93,7 +104,8 @@ final class SearchViewController: UIViewController {
 
         usernameTextField.resignFirstResponder()
 
-        navigationController?.pushViewController(FollowerListViewController(username: usernameTextField.text!), animated: true)
+        let followerListVC = FollowerListViewController(username: usernameTextField.text!, dataService: dataService)
+        navigationController?.pushViewController(followerListVC, animated: true)
     }
 }
 

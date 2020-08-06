@@ -9,7 +9,6 @@
 import UIKit
 
 final class GFAvatarImageView: UIImageView {
-
     private static let placeholderImage = UIImage(named: ImageAssets.avatarPlaceholder)
 
     override init(frame: CGRect) {
@@ -22,26 +21,30 @@ final class GFAvatarImageView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setImage(urlString: String) {
-        image = GFAvatarImageView.placeholderImage
-
-        NetworkManager.shared.getImage(from: urlString) { [weak self] result in
-            guard let self = self else {
-                return
-            }
-            
-            switch result {
-            case .success(let image):
-                DispatchQueue.main.async {
-                    self.image = image
-                }
-                break
-            case .failure(_):
-                // Just leave the placeholder image
-                break
-            }
-        }
+    func setImage(_ image: UIImage) {
+        self.image = image
     }
+    
+//    func setImage(urlString: String) {
+//        image = GFAvatarImageView.placeholderImage
+//
+//        NetworkManager.shared.getImage(from: urlString) { [weak self] result in
+//            guard let self = self else {
+//                return
+//            }
+//
+//            switch result {
+//            case .success(let image):
+//                DispatchQueue.main.async {
+//                    self.image = image
+//                }
+//                break
+//            case .failure(_):
+//                // Just leave the placeholder image
+//                break
+//            }
+//        }
+//    }
     
     private func configure() {
         layer.cornerRadius = 10

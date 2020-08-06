@@ -8,11 +8,11 @@
 
 import UIKit
 
-class FollowerCell: UICollectionViewCell {
-    static let reuseId = "FollowerCell"
-    
+final class FollowerCell: UICollectionViewCell {
     private let avatarImageView = GFAvatarImageView(frame: .zero)
     private let usernameLabel = GFTitleLabel(textAlignment: .center, fontSize: 16)
+    
+    var avatarUpdateDelegate: UserCellAvatarUpdateDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,7 +26,8 @@ class FollowerCell: UICollectionViewCell {
     
     func setFollower(_ follower: Follower) {
         usernameLabel.text = follower.login
-        avatarImageView.setImage(urlString: follower.avatarUrl)
+        
+        avatarUpdateDelegate?.getAvatar(self, for: follower.avatarUrl)
     }
     
     private func configure() {
@@ -47,5 +48,11 @@ class FollowerCell: UICollectionViewCell {
             usernameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             usernameLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
+    }
+}
+
+extension FollowerCell: UserCell {
+    func updateAvatar(_ image: UIImage) {
+        avatarImageView.image = image
     }
 }

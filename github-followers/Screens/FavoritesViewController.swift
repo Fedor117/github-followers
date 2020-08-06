@@ -9,8 +9,20 @@
 import UIKit
 
 final class FavoritesViewController: GFDataLoadingViewController {
+    private let dataService: ManagedDataServicing
+    
     private let tableView = UITableView()
     private var favorites: [Follower] = []
+    
+    init(dataService: ManagedDataServicing) {
+        self.dataService = dataService
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,14 +62,18 @@ final class FavoritesViewController: GFDataLoadingViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.prefetchDataSource = self
-        tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseId)
+        tableView.register(FavoriteCell.self, forCellReuseIdentifier: CellIds.favorite)
     }
 }
 
 // MARK: - UITableViewDelegate
 extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(FollowerListViewController(username: favorites[indexPath.row].login), animated: true)
+        let followerListVC = FollowerListViewController(
+            username: favorites[indexPath.row].login,
+            dataService: dataService)
+
+        navigationController?.pushViewController(followerListVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -80,7 +96,11 @@ extension FavoritesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.reuseId) as! FavoriteCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIds.favorite) as! FavoriteCell
+        if cell.avatarUpdateDelegate == nil {
+            cell.avatarUpdateDelegate = ServiceUserCellUpdateDelegate(dataService: dataService)
+        }
+        
         cell.setFavorite(favorites[indexPath.row])
         return cell
     }
@@ -89,14 +109,14 @@ extension FavoritesViewController: UITableViewDataSource {
 // MARK: - UITableViewDataSourcePrefetching
 extension FavoritesViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        for indexPath in indexPaths {
-            NetworkManager.shared.prefetchImage(from: favorites[indexPath.row].avatarUrl)
-        }
+//        for indexPath in indexPaths {
+//            NetworkManager.shared.prefetchImage(from: favorites[indexPath.row].avatarUrl)
+//        }
     }
     
     func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        for indexPath in indexPaths {
-            NetworkManager.shared.cancelTask(for: favorites[indexPath.row].avatarUrl)
-        }
+//        for indexPath in indexPaths {
+//            NetworkManager.shared.cancelTask(for: favorites[indexPath.row].avatarUrl)
+//        }
     }
 }

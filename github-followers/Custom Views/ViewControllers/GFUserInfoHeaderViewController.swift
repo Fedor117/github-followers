@@ -9,7 +9,6 @@
 import UIKit
 
 final class GFUserInfoHeaderViewController: UIViewController {
-    
     private let avatarImageView = GFAvatarImageView(frame: .zero)
     private let usernameLabel = GFTitleLabel(textAlignment: .left, fontSize: 34)
     private let nameLabel = GFSecondaryTitleLabel(fontSize: 18)
@@ -17,10 +16,12 @@ final class GFUserInfoHeaderViewController: UIViewController {
     private let locationLabel = GFSecondaryTitleLabel(fontSize: 18)
     private let bioLabel = GFBodyLabel(textAlignment: .left)
     
-    private var user: User
+    private let user: User
+    private let dataService: ManagedDataServicing
     
-    init(user: User) {
+    init(user: User, dataService: ManagedDataServicing) {
         self.user = user
+        self.dataService = dataService
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -84,7 +85,6 @@ final class GFUserInfoHeaderViewController: UIViewController {
     }
     
     private func configureUIElements() {
-        avatarImageView.setImage(urlString: user.avatarUrl)
         usernameLabel.text = user.login
         nameLabel.text = user.name ?? "N/A"
         locationLabel.text = user.location ?? "No location"
@@ -93,5 +93,21 @@ final class GFUserInfoHeaderViewController: UIViewController {
         
         locationImageView.image = UIImage(systemName: SFSymbols.location)
         locationImageView.tintColor = .secondaryLabel
+        
+        updateUsersAvatar()
+    }
+    
+    private func updateUsersAvatar() {
+        dataService.getAvatar(from: user.avatarUrl) { result in
+            switch result {
+            case .success(let avatar):
+                DispatchQueue.main.async {
+                    self.avatarImageView.setImage(avatar.image)
+                }
+                break
+            case .failure(_):
+                break
+            }
+        }
     }
 }
